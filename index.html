@@ -1,0 +1,818 @@
+import React, { useState } from 'react';
+import { ArrowRight, Shield, Target, TrendingUp, Zap, Check, Smartphone, Users, Award } from 'lucide-react';
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('home');
+
+  const navigation = [
+    { name: 'Home', id: 'home' },
+    { name: 'Product', id: 'product' },
+    { name: 'How It Works', id: 'how-it-works' },
+    { name: 'Pricing', id: 'pricing' },
+    { name: 'About', id: 'about' },
+    { name: 'Contact', id: 'contact' }
+  ];
+
+  const features = [
+    {
+      icon: <Target className="w-8 h-8" />,
+      title: "Measurable Goals",
+      description: "Train with specific, trackable objectives to maximize your progress."
+    },
+    {
+      icon: <Shield className="w-8 h-8" />,
+      title: "Injury Prevention",
+      description: "Identify technique flaws before they lead to serious injuries."
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8" />,
+      title: "Progress Tracking",
+      description: "Visualize your improvement over time with detailed analytics."
+    },
+    {
+      icon: <Zap className="w-8 h-8" />,
+      title: "Real Feedback",
+      description: "Get instant AI-powered insights instead of guessing your form."
+    }
+  ];
+
+  const howItWorks = [
+    {
+      step: "01",
+      title: "Sensors Collect Data",
+      description: "Lightweight motion sensors in shin guards and gloves track every movement.",
+      icon: "📊"
+    },
+    {
+      step: "02",
+      title: "AI Analyzes Technique",
+      description: "Advanced algorithms process your form, power, and speed in real-time.",
+      icon: "🤖"
+    },
+    {
+      step: "03",
+      title: "Instant Feedback",
+      description: "Receive personalized tips and performance scores on your mobile app.",
+      icon: "📱"
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Marcus Chen",
+      role: "Professional Kickboxer",
+      quote: "KickSense transformed my training. I can see exactly where I need to improve and track my progress daily.",
+      image: "https://placehold.co/80x80/1f2937/ffffff?text=MC"
+    },
+    {
+      name: "Sarah Rodriguez",
+      role: "Amateur Champion",
+      quote: "The injury prevention alerts saved me from overtraining. This is the future of combat sports.",
+      image: "https://placehold.co/80x80/1f2937/ffffff?text=SR"
+    },
+    {
+      name: "Jamal Washington",
+      role: "Martial Arts Coach",
+      quote: "My students love the gamification aspect. They're more motivated than ever to train consistently.",
+      image: "https://placehold.co/80x80/1f2937/ffffff?text=JW"
+    }
+  ];
+
+  const pricingPlans = [
+    {
+      name: "Starter Pack",
+      price: "€249",
+      period: "one-time",
+      features: [
+        "Smart shin guards with sensors",
+        "Smart gloves with sensors",
+        "Charging dock",
+        "Basic app access (3 months)"
+      ],
+      cta: "Pre-Order Now",
+      popular: false
+    },
+    {
+      name: "Premium Bundle",
+      price: "€299",
+      period: "one-time",
+      features: [
+        "Everything in Starter Pack",
+        "Premium app subscription (12 months)",
+        "Advanced analytics dashboard",
+        "Personalized training programs"
+      ],
+      cta: "Get Premium",
+      popular: true
+    }
+  ];
+
+  const teamMembers = [
+    {
+      name: "Tristan Somers",
+      role: "Co-Founder & CTO",
+      bio: "Former competitive kickboxer with 10+ years of experience. Passionate about merging technology with combat sports.",
+      image: "https://placehold.co/200x200/1f2937/ffffff?text=TS"
+    },
+    {
+      name: "Bob De Cleene",
+      role: "Co-Founder & CEO",
+      bio: "Sports technology entrepreneur with a mission to make professional training accessible to every sporter.",
+      image: "https://placehold.co/200x200/1f2937/ffffff?text=BDC"
+    }
+  ];
+
+  const comparisonData = [
+    { feature: "Measures Power", traditional: false, kicksense: true },
+    { feature: "Tracks Improvement", traditional: false, kicksense: true },
+    { feature: "Injury Prevention Feedback", traditional: false, kicksense: true },
+    { feature: "Motivating Performance Score", traditional: false, kicksense: true },
+    { feature: "Real-time Technique Analysis", traditional: false, kicksense: true },
+    { feature: "Personalized Training Tips", traditional: false, kicksense: true }
+  ];
+
+  const handleLearnMore = () => {
+    setActiveTab('product');
+  };
+
+  const handleHowWeWork = () => {
+    setActiveTab('how-it-works');
+  };
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Navigation */}
+      <nav className="relative z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-red-600 rounded-full"></div>
+              <span className="text-xl font-bold">KickSense</span>
+            </div>
+            
+            <div className="hidden md:flex space-x-8">
+              {navigation.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+
+            <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              <div className="w-6 h-6 flex flex-col justify-center items-center">
+                <span className="block w-6 h-0.5 bg-white mb-1"></span>
+                <span className="block w-6 h-0.5 bg-white mb-1"></span>
+                <span className="block w-6 h-0.5 bg-white"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-black border-t border-gray-800">
+            <div className="px-4 py-2 space-y-2">
+              {navigation.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    setActiveTab(item.id);
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full text-left py-2 text-gray-300 hover:text-white"
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      {activeTab === 'home' && (
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/90"></div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+            <div className="text-center">
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+                Train Smarter.
+                <br />
+                <span className="text-red-600">Fight Stronger.</span>
+              </h1>
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                The world's first smart training system designed specifically for kickboxers. 
+                Real-time feedback, AI-powered analysis, and professional-level sports analytics.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  onClick={handleLearnMore}
+                  className="bg-red-600 hover:bg-red-700 px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200 flex items-center justify-center"
+                >
+                  Learn More
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </button>
+                <button 
+                  onClick={handleHowWeWork}
+                  className="border-2 border-white hover:bg-white hover:text-black px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200"
+                >
+                  How We Work
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* What Is KickSense */}
+      {activeTab === 'home' && (
+        <section className="py-16 bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl font-bold mb-6">The First Smart Training System for Kickboxers</h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  KickSense integrates lightweight motion sensors into premium shin guards and gloves, 
+                  transforming your training with real-time data on power, speed, and accuracy.
+                </p>
+                <div className="grid grid-cols-2 gap-6">
+                  {features.map((feature, index) => (
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="text-red-600 mt-1">{feature.icon}</div>
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                        <p className="text-gray-400">{feature.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="relative">
+                <img 
+                  src="https://placehold.co/600x400/dc2626/ffffff?text=Smart+Shin+Guards+%26+Gloves+with+Sensors" 
+                  alt="KickSense Smart Equipment"
+                  className="rounded-2xl shadow-2xl border-4 border-red-600"
+                />
+                <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-red-600 rounded-full opacity-20"></div>
+                <div className="absolute -top-6 -right-6 w-16 h-16 bg-red-600 rounded-full opacity-20"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Product Gallery Section */}
+      {activeTab === 'home' && (
+        <section className="py-16 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Premium Equipment, Built for Performance</h2>
+              <p className="text-xl text-gray-400">Engineered with the finest materials and cutting-edge technology</p>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-800 hover:border-red-600 transition-all duration-300">
+                <img 
+                  src="https://placehold.co/500x350/1f2937/ffffff?text=Premium+Smart+Shin+Guards%0A%0ABuilt-in+Sensors%0A%0AImpact+Resistant" 
+                  alt="Smart Shin Guards"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div className="absolute bottom-6 left-6">
+                  <h3 className="text-2xl font-bold">Smart Shin Guards</h3>
+                  <p className="text-gray-300">Carbon fiber reinforced with embedded motion sensors</p>
+                </div>
+              </div>
+              <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-800 hover:border-red-600 transition-all duration-300">
+                <img 
+                  src="https://placehold.co/500x350/1f2937/ffffff?text=Advanced+Smart+Gloves%0A%0APrecision+Sensors%0A%0ABreathable+Material" 
+                  alt="Smart Gloves"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div className="absolute bottom-6 left-6">
+                  <h3 className="text-2xl font-bold">Smart Gloves</h3>
+                  <p className="text-gray-300">Ultra-responsive sensors with premium leather construction</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* How It Works */}
+      {activeTab === 'home' && (
+        <section className="py-16 bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                Three simple steps to transform your training forever
+              </p>
+            </div>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {howItWorks.map((step, index) => (
+                <div key={index} className="text-center p-8 bg-black rounded-2xl border border-gray-800">
+                  <div className="text-4xl mb-4">{step.icon}</div>
+                  <div className="text-red-600 text-2xl font-bold mb-2">{step.step}</div>
+                  <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
+                  <p className="text-gray-400">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* App Interface Preview */}
+      {activeTab === 'home' && (
+        <section className="py-16 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl font-bold mb-6">Your Digital Coach, Anytime</h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  The KickSense mobile app delivers professional-level analytics and personalized feedback 
+                  right to your pocket. Track your progress, compete with friends, and unlock your full potential.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-3">
+                    <Check className="w-5 h-5 text-red-600" />
+                    <span>Real-time performance scoring</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Check className="w-5 h-5 text-red-600" />
+                    <span>Advanced technique analysis</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Check className="w-5 h-5 text-red-600" />
+                    <span>Personalized training programs</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Check className="w-5 h-5 text-red-600" />
+                    <span>Progress tracking and challenges</span>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <img 
+                  src="https://placehold.co/400x700/1f2937/ffffff?text=Performance+Dashboard%0A%0APower%3A+87%25%0ASpeed%3A+92%25%0AAccuracy%3A+78%25%0A%0AWeekly+Progress%3A+%2B15%25" 
+                  alt="KickSense Mobile App Dashboard"
+                  className="rounded-3xl shadow-2xl border-2 border-gray-700"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Comparison Chart */}
+      {activeTab === 'home' && (
+        <section className="py-16 bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">KickSense vs Traditional Training</h2>
+              <p className="text-xl text-gray-400">Why guess when you can know?</p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="text-left py-4 px-6 font-semibold">Feature</th>
+                    <th className="text-center py-4 px-6 font-semibold">Traditional Training</th>
+                    <th className="text-center py-4 px-6 font-semibold">KickSense</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonData.map((row, index) => (
+                    <tr key={index} className="border-b border-gray-800 hover:bg-gray-800/50">
+                      <td className="py-4 px-6">{row.feature}</td>
+                      <td className="text-center py-4 px-6">
+                        {row.traditional ? <Check className="w-5 h-5 text-red-600 mx-auto" /> : '❌'}
+                      </td>
+                      <td className="text-center py-4 px-6">
+                        {row.kicksense ? <Check className="w-5 h-5 text-red-600 mx-auto" /> : '❌'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Testimonials */}
+      {activeTab === 'home' && (
+        <section className="py-16 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Trusted by Fighters Worldwide</h2>
+              <p className="text-xl text-gray-400">Real results from real athletes</p>
+            </div>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="bg-gray-900 p-8 rounded-2xl border border-gray-800">
+                  <div className="flex items-center mb-6">
+                    <img 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      className="w-16 h-16 rounded-full mr-4"
+                    />
+                    <div>
+                      <h3 className="font-semibold text-lg">{testimonial.name}</h3>
+                      <p className="text-red-600">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 italic">"{testimonial.quote}"</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Pricing */}
+      {activeTab === 'home' && (
+        <section className="py-16 bg-gray-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4">Get Started Today</h2>
+              <p className="text-xl text-gray-400">Professional training, accessible to everyone</p>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {pricingPlans.map((plan, index) => (
+                <div 
+                  key={index} 
+                  className={`p-8 rounded-2xl border-2 ${
+                    plan.popular 
+                      ? 'border-red-600 bg-black/50 relative' 
+                      : 'border-gray-800 bg-black'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                      Most Popular
+                    </div>
+                  )}
+                  <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold">{plan.price}</span>
+                    <span className="text-gray-400 ml-2">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, featIndex) => (
+                      <li key={featIndex} className="flex items-center space-x-3">
+                        <Check className="w-5 h-5 text-red-600" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button className={`w-full py-3 rounded-lg font-semibold transition-colors duration-200 ${
+                    plan.popular 
+                      ? 'bg-red-600 hover:bg-red-700' 
+                      : 'bg-gray-800 hover:bg-gray-700 border border-gray-700'
+                  }`}>
+                    {plan.cta}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Footer */}
+      {activeTab === 'home' && (
+        <footer className="bg-black border-t border-gray-800 py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-4 gap-8">
+              <div>
+                <div className="flex items-center space-x-2 mb-4">
+                  <div className="w-8 h-8 bg-red-600 rounded-full"></div>
+                  <span className="text-xl font-bold">KickSense</span>
+                </div>
+                <p className="text-gray-400">
+                  Innovating combat training with smart technology and AI-powered insights.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4">Quick Links</h4>
+                <ul className="space-y-2 text-gray-400">
+                  {navigation.map((item) => (
+                    <li key={item.id}>
+                      <button 
+                        onClick={() => setActiveTab(item.id)}
+                        className="hover:text-white transition-colors duration-200"
+                      >
+                        {item.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4">Connect</h4>
+                <div className="space-y-2 text-gray-400">
+                  <p>hello@kicksense.com</p>
+                  <p>+1 (555) 123-4567</p>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold mb-4">Follow Us</h4>
+                <div className="flex space-x-4">
+                  <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors duration-200 cursor-pointer">
+                    <span className="font-bold">f</span>
+                  </div>
+                  <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors duration-200 cursor-pointer">
+                    <span className="font-bold">t</span>
+                  </div>
+                  <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors duration-200 cursor-pointer">
+                    <span className="font-bold">ig</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+              <p>© 2024 KickSense. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      )}
+
+      {/* Product Page */}
+      {activeTab === 'product' && (
+        <div className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold mb-8">Product Details</h1>
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div>
+                <img 
+                  src="https://placehold.co/600x500/dc2626/ffffff?text=KickSense+Smart+Equipment+Close-up%0A%0ASensors+in+Shin+Guards+%26+Gloves" 
+                  alt="KickSense Product Detail"
+                  className="rounded-2xl border-4 border-red-600"
+                />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Engineered for Performance</h2>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Premium Materials</h3>
+                    <p className="text-gray-300">
+                      Our shin guards and gloves are crafted from high-density foam and reinforced 
+                      with carbon fiber for maximum protection and durability.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Advanced Sensors</h3>
+                    <p className="text-gray-300">
+                      Ultra-lightweight motion sensors with 99.8% accuracy track every punch and kick 
+                      with precision timing and force measurement.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Long Battery Life</h3>
+                    <p className="text-gray-300">
+                      48-hour battery life with fast charging. Perfect for intense training sessions 
+                      and tournaments.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Water Resistant</h3>
+                    <p className="text-gray-300">
+                      Built to withstand the toughest training conditions with IP67 water resistance rating.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Detailed Product Gallery */}
+            <div className="mt-16">
+              <h2 className="text-3xl font-bold mb-8 text-center">Equipment Gallery</h2>
+              <div className="grid lg:grid-cols-3 gap-8">
+                <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-800 hover:border-red-600 transition-all duration-300">
+                  <img 
+                    src="https://placehold.co/400x300/1f2937/ffffff?text=Shin+Guard+Front+View%0A%0AEmbedded+Sensor+Array" 
+                    alt="Shin Guard Front"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <h3 className="text-lg font-semibold">Shin Guard - Front</h3>
+                  </div>
+                </div>
+                <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-800 hover:border-red-600 transition-all duration-300">
+                  <img 
+                    src="https://placehold.co/400x300/1f2937/ffffff?text=Shin+Guard+Side+View%0A%0AReinforced+Protection" 
+                    alt="Shin Guard Side"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <h3 className="text-lg font-semibold">Shin Guard - Side</h3>
+                  </div>
+                </div>
+                <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-800 hover:border-red-600 transition-all duration-300">
+                  <img 
+                    src="https://placehold.co/400x300/1f2937/ffffff?text=Glove+Close-up%0A%0APrecision+Sensor+Technology" 
+                    alt="Glove Close-up"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <h3 className="text-lg font-semibold">Glove Detail</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* How It Works Page */}
+      {activeTab === 'how-it-works' && (
+        <div className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold mb-8 text-center">How KickSense Works</h1>
+            <div className="max-w-4xl mx-auto">
+              <div className="space-y-12">
+                <div className="flex items-center space-x-8">
+                  <div className="flex-shrink-0 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-2xl font-bold">
+                    1
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">Data Collection</h3>
+                    <p className="text-gray-300 text-lg">
+                      Lightweight sensors embedded in your shin guards and gloves capture every movement 
+                      with millisecond precision, measuring force, speed, and trajectory.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-8">
+                  <div className="flex-shrink-0 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-2xl font-bold">
+                    2
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">AI Analysis</h3>
+                    <p className="text-gray-300 text-lg">
+                      Our proprietary AI algorithms analyze your technique in real-time, comparing your 
+                      movements against professional standards and identifying areas for improvement.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-8">
+                  <div className="flex-shrink-0 w-20 h-20 bg-red-600 rounded-full flex items-center justify-center text-2xl font-bold">
+                    3
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">Instant Feedback</h3>
+                    <p className="text-gray-300 text-lg">
+                      Receive immediate, actionable insights through your mobile app, including performance 
+                      scores, technique corrections, and personalized training recommendations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pricing Page */}
+      {activeTab === 'pricing' && (
+        <div className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl font-bold mb-4">Pricing Plans</h1>
+              <p className="text-xl text-gray-400">Choose the perfect plan for your training needs</p>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {pricingPlans.map((plan, index) => (
+                <div 
+                  key={index} 
+                  className={`p-8 rounded-2xl border-2 ${
+                    plan.popular 
+                      ? 'border-red-600 bg-black/50 relative' 
+                      : 'border-gray-800 bg-black'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                      Most Popular
+                    </div>
+                  )}
+                  <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
+                  <div className="mb-6">
+                    <span className="text-4xl font-bold">{plan.price}</span>
+                    <span className="text-gray-400 ml-2">{plan.period}</span>
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, featIndex) => (
+                      <li key={featIndex} className="flex items-center space-x-3">
+                        <Check className="w-5 h-5 text-red-600" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button className={`w-full py-3 rounded-lg font-semibold transition-colors duration-200 ${
+                    plan.popular 
+                      ? 'bg-red-600 hover:bg-red-700' 
+                      : 'bg-gray-800 hover:bg-gray-700 border border-gray-700'
+                  }`}>
+                    {plan.cta}
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className="max-w-2xl mx-auto mt-12 p-6 bg-black rounded-xl border border-gray-800">
+              <h3 className="text-xl font-bold mb-4 text-center">Subscription Details</h3>
+              <p className="text-gray-300 text-center">
+                Premium app subscription: €9.99/month after initial period. 
+                Cancel anytime. Starter pack includes 3 months of basic app access.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* About Page */}
+      {activeTab === 'about' && (
+        <div className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold mb-8 text-center">About KickSense</h1>
+            <div className="text-center mb-12">
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Founded by two passionate kickboxers who believed every sporter deserves access 
+                to professional-level training technology.
+              </p>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-12">
+              {teamMembers.map((member, index) => (
+                <div key={index} className="text-center">
+                  <img 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-48 h-48 rounded-full mx-auto mb-6 object-cover border-4 border-red-600"
+                  />
+                  <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
+                  <p className="text-red-600 mb-4">{member.role}</p>
+                  <p className="text-gray-300">{member.bio}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Page */}
+      {activeTab === 'contact' && (
+        <div className="py-16">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
+            <div className="bg-black p-8 rounded-2xl border border-gray-800">
+              <form className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Name</label>
+                  <input 
+                    type="text" 
+                    className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <input 
+                    type="email" 
+                    className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Message</label>
+                  <textarea 
+                    rows="5"
+                    className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                    placeholder="Tell us what you'd like to know..."
+                  ></textarea>
+                </div>
+                <button 
+                  type="submit"
+                  className="w-full bg-red-600 hover:bg-red-700 py-3 rounded-lg font-semibold transition-colors duration-200"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
